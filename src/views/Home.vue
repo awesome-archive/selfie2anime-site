@@ -11,7 +11,8 @@
              class="navbar navbar-expand-lg navbar-light fixed-top py-3">
             <div class="container">
                 <a href="#home" class="navbar-brand js-scroll-trigger">
-                    Selfie2Anime <span class="navbar-brand-inverted">アニメ</span>
+                    <span class="navbar-brand-inverted">Selfie</span>2<span class="navbar-brand-inverted">Anime</span>
+                    アニメ
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -21,16 +22,29 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item">
-                            <a href="#home" class="nav-link js-scroll-trigger">Home</a>
+                            <a href="#home" class="nav-link js-scroll-trigger">
+                                {{ $t("home") }}
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#about" class="nav-link js-scroll-trigger">About</a>
+                            <a href="/blog/" class="nav-link">
+                                {{ $t("blog") }}
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#portfolio" class="nav-link js-scroll-trigger">Portfolio</a>
+                            <a href="#about" class="nav-link js-scroll-trigger">
+                                {{ $t("about") }}
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#contact" class="nav-link js-scroll-trigger">Contact</a>
+                            <a href="#portfolio" class="nav-link js-scroll-trigger">
+                                {{ $t("portfolio") }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link js-scroll-trigger">
+                                {{ $t("contact") }}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -65,7 +79,8 @@
                     Here are a few examples for you to check out.
                 </div>
 
-                <div class="row justify-content-center">
+                <!-- Carousel -->
+                <div class="row justify-content-center m-0">
                     <div class="col col-sm-12 col-md-8 col-lg-6">
                         <div class="card shadow-lg">
                             <div class="card-body p-2">
@@ -82,8 +97,9 @@
                                         <div v-for="i in carouselImageCount"
                                              :key="`carousel-image-${i}`"
                                              :class="['carousel-item', i === 1? 'active':'']">
-                                            <img class="d-block w-100"
-                                                 :src="`./img/carousel/${i}.jpg`"
+                                            <img class="d-block w-100 lazyload"
+                                                 :src="i <= 2 ? `./img/carousel/${i}.jpg` : ''"
+                                                 :data-src="`./img/carousel/${i}.jpg`"
                                                  :alt="`Example Image #${i}`">
                                         </div>
                                     </div>
@@ -107,23 +123,110 @@
                     Be sure to <a href="#contact" class="js-scroll-trigger">follow us on social media</a>
                     for further updates! If you are interested in how this works, we have made the source code
                     available on Github for both the
-                    <a href="https://github.com/SilentByte/selfie2anime-site">front-end</a>
+                    <a href="https://github.com/SilentByte/selfie2anime-site" target="_blank">front-end</a>
                     and the
-                    <a href="https://github.com/t04glovern/selfie2anime">back-end</a>.
+                    <a href="https://github.com/t04glovern/selfie2anime" target="_blank">back-end</a>.
+                    Head over to <a href="/blog/">our blog</a> where we discuss the technical aspects
+                    of this website.
                 </div>
 
                 <div class="mt-5">
                     <div class="large-caption text-primary">
                         <div class="spinner-grow" style="width: 0.5em; height: 0.5em; margin-bottom: 0.25em;"></div>
-                        {{ estimateCounter }}
+                        {{ estimateCounter.toLocaleString() }}
                         <div class="spinner-grow" style="width: 0.5em; height: 0.5em; margin-bottom: 0.25em;"></div>
                     </div>
                     <div class="text-primary text-uppercase mt-4">selfies &amp; counting</div>
                 </div>
 
+                <div class="mt-4">
+                    <a href="https://www.producthunt.com/posts/selfie2anime?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-selfie2anime"
+                       target="_blank">
+                        <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=164770&theme=light"
+                             alt="Selfie2Anime - Ever wondered what you'd look like as an Anime character? | Product Hunt Embed"
+                             style="width: 250px; height: 54px;" width="250px" height="54px" />
+                    </a>
+                </div>
+
                 <div class="my-5 text-muted" style="line-height: 2em">
                     The GAN we are using is based on original work by Junho Kim, Minjae Kim, Hyeonwoo Kang, and
                     Kwanghee Lee. Their repository is <a href="https://github.com/taki0112/UGATIT">available here</a>.
+                </div>
+            </div>
+            <div class="container pt-5 text-center">
+                <hr />
+                <h2 class="my-5 text-primary text-lowercase text-break">
+                    <a href="https://twitter.com/intent/tweet?url=https://selfie2anime.com&text=What do YOU look like in Anime?&hashtags=selfie2anime"
+                       target="_blank"
+                       rel="noopener">
+                        #selfie2anime
+                    </a>
+                </h2>
+                <div class="row mt-2 mb-5 social-container text-center justify-content-center">
+                    <div class="col-12 my-1 col-md-3">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://selfie2anime.com"
+                           class="btn btn-lg facebook"
+                           target="_blank"
+                           rel="noopener">
+                            <i class="fa fa-facebook-square"></i>
+                            Share
+                        </a>
+                    </div>
+
+                    <div class="col-12 my-1 col-md-3">
+                        <a href="https://twitter.com/intent/tweet?url=https://selfie2anime.com&text=What do YOU look like in Anime?&hashtags=selfie2anime"
+                           class="btn btn-lg twitter"
+                           target="_blank"
+                           rel="noopener">
+                            <i class="fa fa-twitter"></i>
+                            Tweet
+                        </a>
+                    </div>
+
+                    <div class="col-12 my-1 col-md-3">
+                        <a href="mailto:?subject=What do YOU look like in Anime?&body=Check out https://selfie2anime.com to find out!"
+                           class="btn btn-lg email"
+                           rel="noopener">
+                            <i class="fa fa-envelope"></i>
+                            Send
+                        </a>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-12 col-sm-12 col-md-12 offset-md-0 col-lg-6">
+                        <a class="twitter-timeline"
+                           data-theme="light"
+                           data-link-color="#f06292"
+                           data-chrome="noheader nofooter noborders"
+                           data-tweet-limit="1"
+                           data-show-replies="true"
+                           href="https://twitter.com/RicoBeti/timelines/1163354787154259970?ref_src=twsrc%5Etfw">
+                            Selfie2Anime Tweets by @RicoBeti
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 offset-md-0 col-lg-6">
+                        <iframe src="https://cards.producthunt.com/cards/posts/164770?v=1"
+                                allowfullscreen
+                                style="border: none;"
+                                width="100%"
+                                height="500"
+                                frameborder="0"
+                                scrolling="no">
+                        </iframe>
+                    </div>
+                    <!--
+                    <div class="col-12 col-sm-12 col-md-12 offset-md-0 col-lg-6">
+                        <a class="twitter-timeline"
+                           data-theme="light"
+                           data-link-color="#f06292"
+                           data-chrome="noheader nofooter noborders"
+                           data-tweet-limit="1"
+                           data-show-replies="true"
+                           href="https://twitter.com/RicoBeti/timelines/1163362875022274560?ref_src=twsrc%5Etfw">
+                            Selfie2Anime Tweets by @RicoBeti
+                        </a>
+                    </div>
+                    -->
                 </div>
             </div>
         </section>
@@ -149,15 +252,27 @@
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="bg-dark">
-            <div class="container-fluid p-0">
+            <div class="container-fluid portfolio-container p-0">
                 <div class="row no-gutters">
-                    <div v-for="i in 96"
+                    <div v-for="p in portfolio"
                          class="col-lg-1 col-md-2 col-sm-3 col-4">
-                        <a class="portfolio-box" :href="`./img/portfolio/composite/${i}.jpg`">
-                            <img class="img-fluid mx-auto d-block"
-                                 :src="`./img/portfolio/gan/${i}.jpg`" alt="">
+                        <a class="portfolio-box" :href="p.composite">
+                            <img class="img-fluid mx-auto d-block lazyload"
+                                 alt="Generated by GAN"
+                                 :style="{'background-color': p.thumb}"
+                                 :width="p.size"
+                                 :height="p.size"
+                                 :src="transparent1x1"
+                                 :data-src="p.gan">
                             <div class="portfolio-box-caption">
-                                <img class="img-fluid" :src="`./img/portfolio/original/${i}.jpg`" alt="">
+                                <img class="img-fluid lazyload"
+                                     src=""
+                                     alt="Original"
+                                     :style="{'background-color': p.thumb}"
+                                     :width="p.size"
+                                     :height="p.size"
+                                     :src="transparent1x1"
+                                     :data-src="p.original">
                             </div>
                         </a>
                     </div>
@@ -174,27 +289,23 @@
                         <hr class="divider my-4">
                         <p class="text-muted mb-5">
                             Follow us on Twitter and Github to find out what other
-                            projects we're working on or drop us an email if you
-                            have any questions!
+                            projects we're working and feel free to drop us a message
+                            if you have any questions!
                         </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                <div class="row text-center">
+                    <div class="col-12 col-sm-6">
                         <i style="color: #38a1f3" class="fa fa-twitter fa-5x mb-3"></i>
-                        <a class="d-block" href="https://twitter.com/RicoBeti">@RicoBeti</a>
-                        <a class="d-block" href="https://twitter.com/nathangloverAUS">@nathangloverAUS</a>
+                        <a class="d-block" href="https://twitter.com/RicoBeti" target="_blank">@RicoBeti</a>
+                        <a class="d-block" href="https://twitter.com/nathangloverAUS"
+                           target="_blank">@nathangloverAUS</a>
                     </div>
 
-                    <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                    <div class="col-12 col-sm-6">
                         <i style="color: #211f1f" class="fa fa-github fa-5x mb-3"></i>
-                        <a class="d-block" href="https://github.com/SilentByte">@SilentByte</a>
-                        <a class="d-block" href="https://github.com/t04glovern">@t04glovern</a>
-                    </div>
-
-                    <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
-                        <i style="color: #f06292" class="fa fa-envelope fa-5x mb-3"></i>
-                        <a class="d-block" href="mailto:info@selfie2anime.com">info@selfie2anime.com</a>
+                        <a class="d-block" href="https://github.com/SilentByte" target="_blank">@SilentByte</a>
+                        <a class="d-block" href="https://github.com/t04glovern" target="_blank">@t04glovern</a>
                     </div>
                 </div>
             </div>
@@ -204,11 +315,15 @@
         <footer class="bg-light py-5">
             <div class="container">
                 <div class="small text-center text-muted">
-                    <a href="https://selfie2anime.com/terms.html" target="_blank">
+                    <a href="/blog/">
+                        Blog
+                    </a>
+                    &bull;
+                    <a href="/terms/" target="_blank">
                         Terms of Service
                     </a>
                     &bull;
-                    <a href="https://selfie2anime.com/privacy.html" target="_blank">
+                    <a href="/privacy/" target="_blank">
                         Privacy Statement
                     </a>
                 </div>
@@ -226,6 +341,23 @@
     </div>
 </template>
 
+<i18n>
+    en:
+        home: Home
+        blog: Blog
+        about: About
+        portfolio: Portfolio
+        contact: Contact
+
+    zh:
+        home: 首页
+        blog: 博客
+        about: 我们
+        portfolio: 看看
+        contact: 联系
+
+</i18n>
+
 <!--suppress JSMethodCanBeStatic, JSUnusedGlobalSymbols, TypeScriptCheckImport -->
 <script lang="ts">
     import {
@@ -237,6 +369,8 @@
     import * as creative from "@/vendor/creative";
 
     import PhotoUploader from "@/components/PhotoUploader.vue";
+
+    import PORTFOLIO_TREE from "@/gen/portfolio-tree.gen.json";
 
     @Component({
         components: {
@@ -251,6 +385,33 @@
         selfiesPerSecond = 0;
         counterIntervalHandle = 0;
 
+        transparent1x1 = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+        get portfolio() {
+            // Number of images must be multiple of 12 for proper alignment.
+            const tree = PORTFOLIO_TREE.slice(0, Math.floor(PORTFOLIO_TREE.length / 12) * 12);
+
+            // Shuffle order of portfolio images.
+            for(let i = tree.length - 1; i > 0; i--) {
+                const swapIndex = Math.floor(Math.random() * (i + 1));
+                [tree[i], tree[swapIndex]] = [tree[swapIndex], tree[i]];
+            }
+
+            return tree;
+        }
+
+        $th(key: string, values: any | undefined) {
+            return this.$t(key, values)
+                .toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;")
+                .replace(/\[@\s*/g, "<span class=\"text-primary font-weight-bold\">")
+                .replace(/\s*@\]/g, "</span>");
+        }
+
         onUpdateCounter() {
             this.estimateCounter = Math.ceil(
                 this.counter
@@ -260,10 +421,10 @@
         }
 
         async fetchStats() {
-            // TODO: Replace current manually calculated estimates with actual real-time numbers once backend is done.
-            this.counter = 12052;
-            this.selfiesPerSecond = 0.03568;
-            this.counterTimestamp = 1566112917;
+            // TODO: Replace current manually calculated estimates with actual real-time numbers once back-end is done.
+            this.counter = 584256;
+            this.selfiesPerSecond = 0.0275;
+            this.counterTimestamp = 1569148261;
             this.estimateCounter = this.counter;
 
             if(this.counterIntervalHandle) {
@@ -271,7 +432,7 @@
             }
 
             this.onUpdateCounter();
-            this.counterIntervalHandle = setInterval(this.onUpdateCounter, 4000);
+            this.counterIntervalHandle = window.setInterval(this.onUpdateCounter, 4000);
 
             // try {
             //     const response = await axios.get(process.env.VUE_APP_API_COUNT_URL);
@@ -295,6 +456,12 @@
         mounted() {
             this.fetchStats();
             creative.init(jQuery);
+
+            if(navigator.language === "zh"
+                || navigator.language === "zh-CN"
+                || (navigator.languages && navigator.languages.includes("zh"))) {
+                this.$root.$i18n.locale = "zh";
+            }
         }
 
         beforeDestroy() {
@@ -311,6 +478,10 @@
     section h2, .large-caption {
         font-size: 2.8em;
         line-height: 1.25;
+
+        @media (max-width: 576px) {
+            font-size: 2.0em;
+        }
     }
 
     .nav-item, .page-section h2 {
@@ -347,7 +518,7 @@
     }
 
     #portfolio .container-fluid {
-        max-width: 12 * 256px;
+        max-width: 12 * 160px;
     }
 
     .portfolio-box-caption {
